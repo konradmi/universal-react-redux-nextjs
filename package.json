@@ -1,0 +1,17 @@
+{
+  "name": "universal-react-redux-nextjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "KonradM <miekus.konrad@gmail.com>",
+  "license": "MIT",
+  "scripts":{
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "beta",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
