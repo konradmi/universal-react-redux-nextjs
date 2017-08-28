@@ -1,10 +1,16 @@
 import React from 'react'
+import withRedux from 'next-redux-wrapper'
 
-const Page = ({custom}) => (<div>Custom prop {custom}</div>)
+import makeStore from '../store'
+import { testAction } from '../actions/test-actions'
 
-Page.getInitialProps = ({pathname, query}) => ({        
-  custom: 'custom proooop'
-})
+let Page = ({custom, test}) => (<div>CUSTOM PROP {custom} {test.text}</div>)
+
+Page.getInitialProps = ({store, pathname, query}) => {        
+  store.dispatch(testAction('value from store'))
+  return { custom: 'custom prop' }
+}
+
+Page = withRedux(makeStore, state => ({test: state.test}))(Page)
 
 export default Page
-
