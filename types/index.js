@@ -1,1 +1,1 @@
-export const TEST = 'TEST'
+export const GET_FIRST_POST = 'GET_FIRST_POST'

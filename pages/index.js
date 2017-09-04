@@ -3,23 +3,22 @@ import withRedux from 'next-redux-wrapper'
 import { bindActionCreators } from 'redux'
 
 import makeStore from '../store'
-import { testAction } from '../actions/test-actions'
+import { getFirstPost } from '../actions/posts-actions'
 
 class Page extends Component {
   
-  static getInitialProps({store, pathname, query}) {
-    store.dispatch(testAction('value from store'))
+  static async getInitialProps({store, pathname, query}) {
+    await store.dispatch(getFirstPost())
     return { custom: 'custom prop' }
   }
 
   render() {
   	return(
-  	  <div>CUSTOM PROP {this.props.custom} {this.props.test.text}</div>
+  	  <div>CUSTOM PROP {this.props.custom} {this.props.posts.firstPost}</div>
   	)
   }
 }
 
-const mapStateToProps = s => ({test: s.test})
-const mapDispatchToProps = d => ({testAction: bindActionCreators(testAction, d)})
+const mapStateToProps = s => ({posts: s.posts})
 
-export default withRedux( makeStore, mapStateToProps, mapDispatchToProps )(Page)
+export default withRedux( makeStore, mapStateToProps )(Page)
