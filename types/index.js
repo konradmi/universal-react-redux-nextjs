@@ -1,1 +1,1 @@
-export const GET_FIRST_POST = 'GET_FIRST_POST'
+export const GET_ALL_POSTS = 'GET_ALL_POSTS'

@@ -3,18 +3,17 @@ import withRedux from 'next-redux-wrapper'
 import { bindActionCreators } from 'redux'
 
 import makeStore from '../store'
-import { getFirstPost } from '../actions/posts-actions'
+import { getAllPosts } from '../actions/posts-actions'
 
 class Page extends Component {
   
   static async getInitialProps({store, pathname, query}) {
-    await store.dispatch(getFirstPost())
-    return { custom: 'custom prop' }
+    await store.dispatch(getAllPosts())
   }
 
   render() {
   	return(
-  	  <div>CUSTOM PROP {this.props.custom} {this.props.posts.firstPost}</div>
+  	  <div>{this.props.posts.allPosts}</div>
   	)
   }
 }

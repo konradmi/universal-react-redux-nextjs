@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions'
 
-import { GET_FIRST_POST } from '../types'
+import { GET_ALL_POSTS } from '../types'
 
 export default handleActions({
-  [GET_FIRST_POST]: (state, action) => ({ ...state, firstPost: action.payload }),
+  [GET_ALL_POSTS]: (state, action) => ({ ...state, allPosts: action.payload }),
 }, {})
