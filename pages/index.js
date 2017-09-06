@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import makeStore from '../store'
 import { getAllPosts } from '../actions/posts-actions'
+import PostRow from '../components/PostRow'
 
 class Page extends Component {
   
@@ -13,7 +14,11 @@ class Page extends Component {
 
   render() {
   	return(
-  	  <div>{this.props.posts.allPosts}</div>
+  	  <div>
+  	    {
+  	      this.props.posts.allPosts.map((post, i) => <PostRow title={post.title} key={i}/>)
+  	    }
+  	  </div>
   	)
   }
 }

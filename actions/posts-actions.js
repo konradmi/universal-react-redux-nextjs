@@ -7,5 +7,5 @@ const getAllPostsAction = createAction(GET_ALL_POSTS)
 
 export const getAllPosts = payload => async d => {
   const allPosts = await axios.get('https://jsonplaceholder.typicode.com/posts')
-  d(getAllPostsAction(JSON.stringify(allPosts.data)))
+  d(getAllPostsAction(allPosts.data))
 }
