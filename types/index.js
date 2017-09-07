@@ -1,1 +1,1 @@
-export const GET_ALL_POSTS = 'GET_ALL_POSTS'
+export const FETCH_USERS = 'FETCH_USERS'

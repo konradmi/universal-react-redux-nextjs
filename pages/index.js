@@ -3,26 +3,22 @@ import withRedux from 'next-redux-wrapper'
 import { bindActionCreators } from 'redux'
 
 import makeStore from '../store'
-import { getAllPosts } from '../actions/posts-actions'
-import PostRow from '../components/PostRow'
+import { fetchUsers } from '../actions/users-actions'
+import UserTable from '../components/UserTable'
 
 class Page extends Component {
   
   static async getInitialProps({store, pathname, query}) {
-    await store.dispatch(getAllPosts())
+    await store.dispatch(fetchUsers())
   }
 
   render() {
   	return(
-  	  <div>
-  	    {
-  	      this.props.posts.allPosts.map((post, i) => <PostRow title={post.title} key={i}/>)
-  	    }
-  	  </div>
+      <UserTable users={this.props.users}/>
   	)
   }
 }
 
-const mapStateToProps = s => ({posts: s.posts})
+const mapStateToProps = s => ({users: s.users})
 
 export default withRedux( makeStore, mapStateToProps )(Page)
