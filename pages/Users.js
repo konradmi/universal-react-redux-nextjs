@@ -6,7 +6,7 @@ import makeStore from '../store'
 import { fetchUsers } from '../actions/users-actions'
 import UserTable from '../components/UserTable'
 
-class Page extends Component {
+class Users extends Component {
   
   static async getInitialProps({store, pathname, query}) {
     await store.dispatch(fetchUsers())
@@ -21,4 +21,4 @@ class Page extends Component {
 
 const mapStateToProps = s => ({users: s.users})
 
-export default withRedux( makeStore, mapStateToProps )(Page)
+export default withRedux( makeStore, mapStateToProps )(Users)
