@@ -16,7 +16,7 @@ const TableHeader = styled.div`
 `
 
 const TableColumnTitle = styled.div`
-  width: 33.3%;
+  width: 25%;
 `
 
 export default class UserTable extends Component {
@@ -32,6 +32,9 @@ export default class UserTable extends Component {
       <TableColumnTitle>
         Email
       </TableColumnTitle>
+      <TableColumnTitle>
+        Actions
+      </TableColumnTitle>
     </TableHeader>
   )
 
@@ -41,6 +44,7 @@ export default class UserTable extends Component {
         name={user.name}
         username={user.username}
         email={user.email}
+        id={user.id}
         key={i}
       />
     ))

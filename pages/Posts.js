@@ -3,16 +3,24 @@ import withRedux from 'next-redux-wrapper'
 import { bindActionCreators } from 'redux'
 
 import makeStore from '../store'
+import { fetchPosts } from '../actions/posts-actions'
 
-export default class Posts extends Component {
+class Posts extends Component {
   
-  static getInitialProps({store, pathname, query}) {
-    return {}
+  static async getInitialProps({store, pathname, query}) {
+    await store.dispatch(fetchPosts( {id: query.id} ))
   }
 
   render() {
   	return(
-      <div>Posts for user {this.props.url.query.id}</div>
+      <div>
+        <div>Posts for user {this.props.url.query.id}</div>
+        <div>{JSON.stringify(this.props.posts)}</div>
+      </div>
   	)
   }
 }
+
+const mapStateToProps = s => ({posts: s.posts})
+
+export default withRedux( makeStore, mapStateToProps )(Posts)
