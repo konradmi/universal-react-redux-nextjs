@@ -18,8 +18,6 @@ const Column = styled.div`
   width: 25%;
 `
 
-const PostsButton = styled.div``
-
 export default class UserRow extends Component {
 
   onShowPosts = id => () => Router.push(`/Posts/${id}`)
@@ -38,7 +36,7 @@ export default class UserRow extends Component {
         </Column>
         <Column>
           <Link href={`/Posts?id=${this.props.id}`} as={`/posts/${this.props.id}`} prefetch>
-            Show comments
+            Show posts
           </Link>
         </Column>
       </UserWrapper>
