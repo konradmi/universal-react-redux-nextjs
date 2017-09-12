@@ -19,9 +19,6 @@ const Column = styled.div`
 `
 
 export default class UserRow extends Component {
-
-  onShowPosts = id => () => Router.push(`/Posts/${id}`)
-
   render() {
   	return (
       <UserWrapper>

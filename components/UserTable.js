@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import UserRow from './UserRow'
 
 const Table = styled.div`
+  margin: auto;
   max-width: 960px;
   border: 2px solid black;
 `

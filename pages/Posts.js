@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import makeStore from '../store'
 import { fetchPosts } from '../actions/posts-actions'
+import PostTable from '../components/PostTable'
 
 class Posts extends Component {
   
@@ -13,10 +14,7 @@ class Posts extends Component {
 
   render() {
   	return(
-      <div>
-        <div>Posts for user {this.props.url.query.id}</div>
-        <div>{JSON.stringify(this.props.posts)}</div>
-      </div>
+      <PostTable posts={this.props.posts} title={`Posts for user ${this.props.url.query.id}`}/>
   	)
   }
 }
