@@ -14,11 +14,11 @@ class Users extends Component {
 
   render() {
   	return(
-      <UserTable users={this.props.users}/>
+      <UserTable users={this.props.users} browser={this.props.browser}/>
   	)
   }
 }
 
-const mapStateToProps = s => ({users: s.users})
+const mapStateToProps = s => ({users: s.users, browser: s.browser})
 
 export default withRedux( makeStore, mapStateToProps )(Users)

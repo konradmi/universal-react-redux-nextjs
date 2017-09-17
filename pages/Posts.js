@@ -14,11 +14,11 @@ class Posts extends Component {
 
   render() {
   	return(
-      <PostTable posts={this.props.posts} title={`Posts for user ${this.props.url.query.id}`}/>
+      <PostTable posts={this.props.posts} title={`Posts for user ${this.props.url.query.id}`} browser={this.props.browser}/>
   	)
   }
 }
 
-const mapStateToProps = s => ({posts: s.posts})
+const mapStateToProps = s => ({posts: s.posts, browser: s.browser})
 
 export default withRedux( makeStore, mapStateToProps )(Posts)

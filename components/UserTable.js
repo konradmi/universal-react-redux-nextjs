@@ -6,6 +6,7 @@ import UserRow from './UserRow'
 const Table = styled.div`
   margin: auto;
   max-width: 960px;
+  min-width: 400px;
   border: 2px solid black;
 `
 
@@ -22,7 +23,7 @@ const TableColumnTitle = styled.div`
 
 export default class UserTable extends Component {
   
-  renderHeader = () => (
+  renderHeader = (p = this.props) => (
     <TableHeader>
       <TableColumnTitle>
         Name
@@ -30,9 +31,13 @@ export default class UserTable extends Component {
       <TableColumnTitle>
         Username
       </TableColumnTitle>
-      <TableColumnTitle>
-        Email
-      </TableColumnTitle>
+      {
+        p.browser.mediaType === 'desktop' && (
+          <TableColumnTitle>
+            Email
+          </TableColumnTitle>
+        )
+      }
       <TableColumnTitle>
         Actions
       </TableColumnTitle>
@@ -46,6 +51,7 @@ export default class UserTable extends Component {
         username={user.username}
         email={user.email}
         id={user.id}
+        browser={p.browser}
         key={i}
       />
     ))

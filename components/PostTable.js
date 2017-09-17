@@ -7,35 +7,48 @@ import PostRow from './PostRow'
 const Wrapper = styled.div`
   margin: auto;
   max-width: 960px;
+  min-width: 400px;
   border: 2px solid black;
   padding: 5px;
 `
 
 const TitleWrapper = styled.div`
   font-weight: bold;
-  font-size: 20px;
+  font-size: ${props => (
+      {
+        phone: '20px;',
+        tablet: '25px;',
+        desktop: '45px;'
+      }[props.browser.mediaType]
+    )
+  }
   text-align: center;
   padding: 5px;
 `
 
-const Text = styled.div``
-
 const BackLink = styled.div`
-  float: left;
+  float: ${props => (
+      {
+        phone: 'none;',
+        tablet: 'left;',
+        desktop: 'left;'
+      }[props.browser.mediaType]
+    )
+  }
 `
 
 export default class PostTable extends Component {
 
   renderTitle = (p = this.props) => (
-    <TitleWrapper>
-      <BackLink>
+    <TitleWrapper browser={p.browser}>
+      <BackLink browser={p.browser}>
         <Link href='/Users' prefetch>
           Back to Users
         </Link>
       </BackLink>
-      <Text>
+      <div>
         {p.title}
-      </Text>
+      </div>
     </TitleWrapper>
   )
 
@@ -52,7 +65,7 @@ export default class PostTable extends Component {
 
   render() {
   	return (
-      <Wrapper>
+      <Wrapper browser={this.props.browser}>
         {this.renderTitle()}
         {this.renderPosts()}
       </Wrapper>

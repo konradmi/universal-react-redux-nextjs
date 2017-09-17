@@ -28,9 +28,12 @@ export default class UserRow extends Component {
         <Column>
           {this.props.username}
         </Column>
-        <Column>
-          {this.props.email}
-        </Column>
+        {this.props.browser.mediaType === 'desktop' && (
+            <Column>
+              {this.props.email}
+            </Column>
+          )
+        }
         <Column>
           <Link href={`/Posts?id=${this.props.id}`} as={`/posts/${this.props.id}`} prefetch>
             Show posts
