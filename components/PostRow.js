@@ -17,13 +17,14 @@ const Body = styled.div`
 
 export default class PostRow extends Component {
   render() {
+    const {order, title, body} = this.props
   	return (
       <Wrapper>
         <Title>
-          {`${this.props.order}. ${this.props.title}`}
+          {`${order}. ${title}`}
         </Title>
         <Body>
-          {this.props.body}
+          {body}
         </Body>
       </Wrapper>
   	)

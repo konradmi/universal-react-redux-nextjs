@@ -15,27 +15,41 @@ const UserWrapper = styled.div`
 `
 
 const Column = styled.div`
-  width: 25%;
+  width: ${props => (
+      {
+        phone: '50%;',
+        tablet: '33.3%;',
+        desktop: '25%;'
+      }[props.browser.mediaType]
+    )
+  }
 `
 
 export default class UserRow extends Component {
   render() {
-  	return (
+    const { browser, id, name, username, email } = this.props
+  	
+    return (
       <UserWrapper>
-        <Column>
+        <Column browser={browser}>
           {this.props.name}
         </Column>
-        <Column>
-          {this.props.username}
-        </Column>
-        {this.props.browser.mediaType === 'desktop' && (
-            <Column>
-              {this.props.email}
+        {
+          browser.greaterThan.phone && (
+            <Column browser={browser}>
+              {username}
             </Column>
           )
         }
-        <Column>
-          <Link href={`/Posts?id=${this.props.id}`} as={`/posts/${this.props.id}`} prefetch>
+        {
+          browser.greaterThan.tablet && (
+            <Column browser={browser}>
+              {email}
+            </Column>
+          )
+        }
+        <Column browser={browser}>
+          <Link href={`/Posts?id=${id}`} as={`/posts/${id}`} prefetch>
             Show posts
           </Link>
         </Column>

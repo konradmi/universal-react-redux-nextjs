@@ -64,8 +64,9 @@ export default class PostTable extends Component {
   )
 
   render() {
+    const {browser} = this.props
   	return (
-      <Wrapper browser={this.props.browser}>
+      <Wrapper browser={browser}>
         {this.renderTitle()}
         {this.renderPosts()}
       </Wrapper>

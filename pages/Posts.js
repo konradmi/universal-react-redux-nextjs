@@ -13,8 +13,9 @@ class Posts extends Component {
   }
 
   render() {
+  	const {posts, url, browser} = this.props
   	return(
-      <PostTable posts={this.props.posts} title={`Posts for user ${this.props.url.query.id}`} browser={this.props.browser}/>
+      <PostTable posts={posts} title={`Posts for user ${url.query.id}`} browser={browser}/>
   	)
   }
 }

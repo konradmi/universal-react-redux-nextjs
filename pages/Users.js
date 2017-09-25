@@ -13,8 +13,9 @@ class Users extends Component {
   }
 
   render() {
+  	const {users, browser} = this.props
   	return(
-      <UserTable users={this.props.users} browser={this.props.browser}/>
+      <UserTable users={users} browser={browser}/>
   	)
   }
 }
