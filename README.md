@@ -17,6 +17,6 @@ Install yarn package manager
 
 Run `yarn install`
 
-Run `yarn run next`
+Run `yarn run start`
 
 Hit `http://localhost:3000`

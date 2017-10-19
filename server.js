@@ -1,37 +1,33 @@
-const { createServer } = require('http')
-const { parse } = require('url')
+const express = require('express')
 const next = require('next')
-const pathMatch = require('path-match')
-const MobileDetect = require('mobile-detect')
 
+const port = process.env.PORT || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const route = pathMatch()
 
-// const getDevice = (userAgent) => {
-//   const md = new MobileDetect(userAgent)
-//   if (md.phone()) return 'phone'
-//   else if(md.tablet()) return 'tablet'
-//   return 'desktop'
-// }
+app.prepare()
+.then(() => {
+  const server = express()
 
-app.prepare().then(() => {
-  createServer((req, res) => {
-    const { pathname, query } = parse(req.url, true)
-    const params = url => route(url)(pathname)
-    
-    // const device = getDevice(req.headers['user-agent'])
-
-    if (params('/')) { app.render(req, res, '/Users', Object.assign(params('/'), query)) }
-    else if (params('/Posts/:id')) { app.render(req, res, '/Posts', Object.assign(params('/Posts/:id'), query)) }
-    else handle(req, res)
-    // assigning `query` into the params means that we still
-    // get the query string passed to our application
-    // i.e. /blog/foo?show-comments=true
+  server.get('/', (req, res) => {
+    return app.render(req, res, '/Users', req.query)
   })
-  .listen(3000, (err) => {
+
+  server.get('/users', (req, res) => {
+    return app.render(req, res, '/Users', req.query)
+  })
+
+  server.get('/posts/:id', (req, res) => {
+    return app.render(req, res, '/Posts', req.params)
+  })
+
+  server.get('*', (req, res) => {
+    return handle(req, res)
+  })
+
+  server.listen(port, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log(`> Ready on http://localhost:${port}`)
   })
 })
