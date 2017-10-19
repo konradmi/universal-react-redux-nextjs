@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
 import PostRow from './PostRow'
 
@@ -37,23 +38,23 @@ const BackLink = styled.div`
   }
 `
 
-export default class PostTable extends Component {
+const PostTable = ({browser, title, posts}) => {
 
-  renderTitle = (p = this.props) => (
-    <TitleWrapper browser={p.browser}>
-      <BackLink browser={p.browser}>
+  const renderTitle = () => (
+    <TitleWrapper browser={browser}>
+      <BackLink browser={browser}>
         <Link href='/Users' prefetch>
           Back to Users
         </Link>
       </BackLink>
       <div>
-        {p.title}
+        {title}
       </div>
     </TitleWrapper>
   )
 
-  renderPosts = (p = this.props) => (
-    p.posts.map((post, i) => (
+  const renderPosts = () => (
+    posts.map((post, i) => (
       <PostRow
         title={post.title}
         body={post.body}
@@ -63,13 +64,18 @@ export default class PostTable extends Component {
     ))
   )
 
-  render() {
-    const {browser} = this.props
-  	return (
-      <Wrapper browser={browser}>
-        {this.renderTitle()}
-        {this.renderPosts()}
-      </Wrapper>
-  	)
-  }
+  return (
+    <Wrapper browser={browser}>
+      {renderTitle()}
+      {renderPosts()}
+    </Wrapper>
+  )
 }
+
+PostTable.propTypes = {
+  browser: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  posts: PropTypes.array.isRequired,
+}
+
+export default PostTable

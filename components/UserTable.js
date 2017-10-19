@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import UserRow from './UserRow'
 
@@ -28,52 +29,57 @@ const TableColumnTitle = styled.div`
   }
 `
 
-export default class UserTable extends Component {
+const UserTable = ({browser, users}) => {
   
-  renderHeader = (p = this.props) => (
+  const renderHeader = () => (
     <TableHeader>
-      <TableColumnTitle browser={p.browser}>
+      <TableColumnTitle browser={browser}>
         Name
       </TableColumnTitle>
       {
-        p.browser.greaterThan.phone && (
-          <TableColumnTitle browser={p.browser}>
+        browser.greaterThan.phone && (
+          <TableColumnTitle browser={browser}>
             Username
           </TableColumnTitle>
         )
       }
       {
-        p.browser.greaterThan.tablet && (
-          <TableColumnTitle browser={p.browser}>
+        browser.greaterThan.tablet && (
+          <TableColumnTitle browser={browser}>
             Email
           </TableColumnTitle>
         )
       }
-      <TableColumnTitle browser={p.browser}>
+      <TableColumnTitle browser={browser}>
         Actions
       </TableColumnTitle>
     </TableHeader>
   )
 
-  renderRows = (p = this.props) => (
-    p.users.map((user, i) => (
+  const renderRows = () => (
+    users.map((user, i) => (
       <UserRow
         name={user.name}
         username={user.username}
         email={user.email}
         id={user.id}
-        browser={p.browser}
+        browser={browser}
         key={i}
       />
     ))
   )
 
-  render() {
-  	return (
-      <Table>
-        {this.renderHeader()}
-        {this.renderRows()}
-      </Table>
-  	)
-  }
+	return (
+    <Table>
+      {renderHeader()}
+      {renderRows()}
+    </Table>
+	)
 }
+
+UserTable.propTypes = {
+  browser: PropTypes.object.isRequired,
+  users: PropTypes.array.isRequired,
+}
+
+export default UserTable

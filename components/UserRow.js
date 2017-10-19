@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import PropTypes from 'prop-types'
 
 const UserWrapper = styled.div`
   display: flex;
@@ -25,35 +26,39 @@ const Column = styled.div`
   }
 `
 
-export default class UserRow extends Component {
-  render() {
-    const { browser, id, name, username, email } = this.props
-  	
-    return (
-      <UserWrapper>
+const UserRow = ({ browser, id, name, username, email }) => (
+  <UserWrapper>
+    <Column browser={browser}>
+      {name}
+    </Column>
+    {
+      browser.greaterThan.phone && (
         <Column browser={browser}>
-          {this.props.name}
+          {username}
         </Column>
-        {
-          browser.greaterThan.phone && (
-            <Column browser={browser}>
-              {username}
-            </Column>
-          )
-        }
-        {
-          browser.greaterThan.tablet && (
-            <Column browser={browser}>
-              {email}
-            </Column>
-          )
-        }
+      )
+    }
+    {
+      browser.greaterThan.tablet && (
         <Column browser={browser}>
-          <Link href={`/Posts?id=${id}`} as={`/posts/${id}`} prefetch>
-            Show posts
-          </Link>
+          {email}
         </Column>
-      </UserWrapper>
-  	)
-  }
+      )
+    }
+    <Column browser={browser}>
+      <Link href={`/Posts?id=${id}`} as={`/posts/${id}`} prefetch>
+        Show posts
+      </Link>
+    </Column>
+  </UserWrapper>
+)
+
+UserRow.PropTypes = {
+  browser: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 }
+
+export default UserRow
